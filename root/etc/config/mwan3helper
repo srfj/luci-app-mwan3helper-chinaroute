@@ -1,6 +1,8 @@
 
 config mwan3helper 'config'
-	option dns '192.168.6.2'
+	option dns '192.168.0.3'
 	option dev 'br-lan'
-	option enabled '0'
-
+	option enabled '1'
+	option mode '1'
+	option dnsen '1'
+	option dnsserver '192.168.0.3'
