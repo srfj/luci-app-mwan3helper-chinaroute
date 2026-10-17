@@ -22,7 +22,9 @@ end
 
 function act_status()
   local e={}
-  e.running=luci.sys.call("pgrep mwan3dns >/dev/null")==0
+  local enabled = luci.sys.exec("uci -q get mwan3helper.config.enabled"):gsub("%s+", "")
+  local routed  = luci.sys.call("ip rule show 2>/dev/null | grep -q 'lookup 200'") == 0
+  e.running = (enabled == "1") and routed
   luci.http.prepare_content("application/json")
   luci.http.write_json(e)
 end
